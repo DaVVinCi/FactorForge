@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#071a2d"/>
+      <stop offset="1" stop-color="#102b46"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#5cc8ff"/>
+    </marker>
+    <style>
+      .title{font:700 28px Arial;fill:#f6fbff}
+      .sub{font:400 15px Arial;fill:#9fc6df}
+      .box{fill:#123b5a;stroke:#5cc8ff;stroke-width:2;rx:14}
+      .box2{fill:#164a58;stroke:#6fe7c8;stroke-width:2;rx:14}
+      .label{font:700 17px Arial;fill:#fff}
+      .small{font:400 13px Arial;fill:#d6eaf5}
+      .line{stroke:#5cc8ff;stroke-width:2.5;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="620" fill="url(#bg)"/>
+  <text x="55" y="60" class="title">FactorForge · LLM-assisted factor research</text>
+  <text x="55" y="88" class="sub">Point-in-time signals, explicit simulation labels, reproducible evaluation</text>
+
+  <rect x="55" y="145" width="210" height="105" class="box"/>
+  <text x="160" y="178" text-anchor="middle" class="label">Data layer</text>
+  <text x="160" y="204" text-anchor="middle" class="small">Offline simulated panel</text>
+  <text x="160" y="225" text-anchor="middle" class="small">CSV / optional AkShare</text>
+
+  <rect x="340" y="145" width="210" height="105" class="box2"/>
+  <text x="445" y="178" text-anchor="middle" class="label">Factor generation</text>
+  <text x="445" y="204" text-anchor="middle" class="small">Classic · Random</text>
+  <text x="445" y="225" text-anchor="middle" class="small">Mock / DeepSeek V4</text>
+
+  <rect x="625" y="145" width="210" height="105" class="box"/>
+  <text x="730" y="178" text-anchor="middle" class="label">Safe DSL</text>
+  <text x="730" y="204" text-anchor="middle" class="small">AST whitelist · parameters</text>
+  <text x="730" y="225" text-anchor="middle" class="small">zero / look-ahead checks</text>
+
+  <rect x="910" y="145" width="235" height="105" class="box2"/>
+  <text x="1027" y="178" text-anchor="middle" class="label">Research engine</text>
+  <text x="1027" y="204" text-anchor="middle" class="small">IC · Rank IC · ICIR</text>
+  <text x="1027" y="225" text-anchor="middle" class="small">quantiles · turnover</text>
+
+  <path d="M265 197 L340 197" class="line"/>
+  <path d="M550 197 L625 197" class="line"/>
+  <path d="M835 197 L910 197" class="line"/>
+
+  <rect x="745" y="355" width="260" height="110" class="box"/>
+  <text x="875" y="389" text-anchor="middle" class="label">Top-K backtest</text>
+  <text x="875" y="415" text-anchor="middle" class="small">t signal → t+1 return</text>
+  <text x="875" y="436" text-anchor="middle" class="small">fees · NAV · max drawdown</text>
+  <path d="M1027 250 L1027 305 L875 305 L875 355" class="line"/>
+
+  <rect x="390" y="355" width="260" height="110" class="box2"/>
+  <text x="520" y="389" text-anchor="middle" class="label">Feedback loop</text>
+  <text x="520" y="415" text-anchor="middle" class="small">metric-aware diagnostics</text>
+  <text x="520" y="436" text-anchor="middle" class="small">one revised hypothesis</text>
+  <path d="M745 410 L650 410" class="line"/>
+  <path d="M520 355 L520 305 L445 305 L445 250" class="line"/>
+
+  <rect x="55" y="355" width="245" height="110" class="box"/>
+  <text x="177" y="389" text-anchor="middle" class="label">Artifacts & UI</text>
+  <text x="177" y="415" text-anchor="middle" class="small">CSV · JSON · PNG</text>
+  <text x="177" y="436" text-anchor="middle" class="small">Streamlit comparison</text>
+  <path d="M390 410 L300 410" class="line"/>
+
+  <rect x="55" y="535" width="1090" height="42" rx="10" fill="#091522" stroke="#355b73"/>
+  <text x="600" y="562" text-anchor="middle" class="sub">Default metrics are computed from deterministic simulated A-share-like data and are never presented as real performance.</text>
+</svg>
+

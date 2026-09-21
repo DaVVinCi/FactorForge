@@ -1,0 +1,61 @@
+[
+  {
+    "category": "random",
+    "name": "random_baseline_s143",
+    "hypothesis": "A seeded random combination of allowed operators is used only as a control group; it does not encode an economic hypothesis.",
+    "economic_rationale": "None. This baseline estimates how easily a mechanically generated expression can appear interesting on the same sample.",
+    "expression": "Rank(Corr(vwap, volume, 10)) + Rank(Delta(close, 2))",
+    "expected_direction": "positive",
+    "data_requirements": [
+      "OHLCV",
+      "amount"
+    ],
+    "risk_notes": [
+      "No economic rationale",
+      "In-sample chance discovery",
+      "Seed-sensitive expression"
+    ],
+    "iteration_note": "Seeded random control; not produced by an LLM."
+  },
+  {
+    "category": "llm_single",
+    "name": "vwap_reversion_5d",
+    "hypothesis": "Stocks trading below their 5-day volume-weighted average price (VWAP) tend to revert upward over the next few days due to temporary selling pressure or liquidity imbalances, while stocks trading above their 5-day VWAP tend to revert downward.",
+    "economic_rationale": "The VWAP over a medium horizon (5 days) serves as a proxy for the average transaction price of informed and uninformed traders. When the current price deviates significantly below this benchmark, it may indicate short-term overselling, prompting mean-reversion as liquidity providers step in. Conversely, prices far above VWAP may face profit-taking. This effect is expected to be stronger in liquid A-shares where temporary price impacts are corrected.",
+    "expression": "-(close - Mean(vwap, 5)) / Std(vwap, 5)",
+    "expected_direction": "positive",
+    "data_requirements": [
+      "daily adjusted close",
+      "daily volume-weighted average price (vwap)"
+    ],
+    "risk_notes": [
+      "Crowding risk in mean-reversion strategies may reduce efficacy.",
+      "High sensitivity to market regime; momentum regimes can cause prolonged deviations.",
+      "Liquidity shocks or corporate actions may distort VWAP and close prices.",
+      "Transaction costs from frequent rebalancing can erode returns.",
+      "Factor may underperform in trending markets or during structural breaks."
+    ],
+    "iteration_note": "Consider alternative windows (e.g., 10 or 20 days) or combining with volume or volatility filters to improve robustness."
+  },
+  {
+    "category": "llm_feedback",
+    "name": "vwap_reversion_10d",
+    "hypothesis": "Stocks trading below their 10-day volume-weighted average price (VWAP) tend to revert upward over the next few days due to temporary selling pressure or liquidity imbalances, while stocks trading above their 10-day VWAP tend to revert downward.",
+    "economic_rationale": "The VWAP over a longer horizon (10 days) serves as a more stable proxy for the average transaction price of informed and uninformed traders. When the current price deviates significantly below this benchmark, it may indicate short-term overselling, prompting mean-reversion as liquidity providers step in. Conversely, prices far above VWAP may face profit-taking. This effect is expected to be stronger in liquid A-shares where temporary price impacts are corrected, and the longer window may reduce turnover and noise.",
+    "expression": "-(close - Mean(vwap, 10)) / Std(vwap, 10)",
+    "expected_direction": "positive",
+    "data_requirements": [
+      "daily adjusted close",
+      "daily volume-weighted average price (vwap)"
+    ],
+    "risk_notes": [
+      "Crowding risk in mean-reversion strategies may reduce efficacy.",
+      "High sensitivity to market regime; momentum regimes can cause prolonged deviations.",
+      "Liquidity shocks or corporate actions may distort VWAP and close prices.",
+      "Transaction costs from rebalancing can erode returns, though turnover may be lower than the 5-day version.",
+      "Factor may underperform in trending markets or during structural breaks.",
+      "Revision evaluated on the same sample remains in-sample and may overfit."
+    ],
+    "iteration_note": "Revised the prior 5-day VWAP reversion factor to a 10-day window in response to high turnover diagnostics. This change aims to reduce turnover while maintaining the same economic idea. The revised factor has not been re-evaluated out-of-sample."
+  }
+]

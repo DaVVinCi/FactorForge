@@ -1,0 +1,26 @@
+project:
+  name: FactorForge
+  language: zh
+
+data:
+  source: simulated
+  start_date: "2023-01-02"
+  periods: 260
+  symbols: 30
+  seed: 42
+
+research:
+  forward_periods: 1
+  quantiles: 5
+  min_cross_section: 8
+
+backtest:
+  top_k: 5
+  fee_bps: 10.0
+  annualization: 252
+
+llm:
+  mode: mock
+  provider: deepseek
+  model: deepseek-flash
+  base_url: https://api.deepseek.com

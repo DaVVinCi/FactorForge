@@ -1,0 +1,54 @@
+[
+  {
+    "category": "random",
+    "name": "random_baseline_s143",
+    "hypothesis": "A seeded random combination of allowed operators is used only as a control group; it does not encode an economic hypothesis.",
+    "economic_rationale": "None. This baseline estimates how easily a mechanically generated expression can appear interesting on the same sample.",
+    "expression": "Rank(Corr(vwap, volume, 10)) + Rank(Delta(close, 2))",
+    "expected_direction": "positive",
+    "data_requirements": [
+      "OHLCV",
+      "amount"
+    ],
+    "risk_notes": [
+      "No economic rationale",
+      "In-sample chance discovery",
+      "Seed-sensitive expression"
+    ],
+    "iteration_note": "Seeded random control; not produced by an LLM."
+  },
+  {
+    "category": "llm_single",
+    "name": "mock_llm_quality_momentum_v1",
+    "hypothesis": "A short moving-average return combined with a volatility penalty may favor steadier recent winners after the daily close.",
+    "economic_rationale": "The momentum term captures gradual price adjustment while the volatility term penalizes unstable moves that may reverse.",
+    "expression": "Rank(Mean(close / Delay(close, 1) - 1, 5)) - 0.3 * Rank(Std(close / Delay(close, 1) - 1, 10))",
+    "expected_direction": "positive",
+    "data_requirements": [
+      "daily adjusted close"
+    ],
+    "risk_notes": [
+      "Short horizon can create high turnover",
+      "Momentum crashes",
+      "Sensitive to suspension and limit-up execution"
+    ],
+    "iteration_note": "Offline deterministic Mock LLM proposal."
+  },
+  {
+    "category": "llm_feedback",
+    "name": "mock_llm_quality_momentum_feedback_v2",
+    "hypothesis": "Lengthening both the return and risk windows may reduce noise and turnover while retaining the original quality-momentum idea.",
+    "economic_rationale": "A slower signal reacts less to one-day price noise. A stronger risk penalty reduces exposure to volatile recent moves.",
+    "expression": "Rank(Mean(close / Delay(close, 1) - 1, 20)) - 0.5 * Rank(Std(close / Delay(close, 1) - 1, 20))",
+    "expected_direction": "positive",
+    "data_requirements": [
+      "daily adjusted close"
+    ],
+    "risk_notes": [
+      "Longer windows react slowly to regime changes",
+      "Still requires out-of-sample and neutralization tests",
+      "Backtest feedback can overfit the same sample"
+    ],
+    "iteration_note": "Mock feedback revision. Inputs included measured metrics and: Turnover is high; use longer rolling windows or a slower-changing input.; Drawdown is material; strengthen the risk penalty and test regime stability.; Any revision evaluated on the same sample remains in-sample and may overfit."
+  }
+]

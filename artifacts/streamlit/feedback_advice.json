@@ -1,0 +1,12 @@
+{
+  "advice": [
+    "Turnover is high; use longer rolling windows or a slower-changing input.",
+    "Any revision evaluated on the same sample remains in-sample and may overfit."
+  ],
+  "feedback_vs_single": {
+    "rank_ic_mean_delta": -0.011333227395518827,
+    "mean_turnover_delta": -0.2122222222222222,
+    "max_drawdown_delta": -0.01843337360338848,
+    "note": "Computed on the same sample; a positive delta is not out-of-sample evidence of improvement."
+  }
+}

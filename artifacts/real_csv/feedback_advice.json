@@ -1,0 +1,13 @@
+{
+  "advice": [
+    "Rank IC is weak on this sample; simplify the thesis or lengthen the horizon.",
+    "Drawdown is material; strengthen the risk penalty and test regime stability.",
+    "Any revision evaluated on the same sample remains in-sample and may overfit."
+  ],
+  "feedback_vs_single": {
+    "rank_ic_mean_delta": null,
+    "mean_turnover_delta": 0.0,
+    "max_drawdown_delta": 3.3306690738754696e-16,
+    "note": "Computed on the same sample; a positive delta is not out-of-sample evidence of improvement."
+  }
+}

@@ -1,0 +1,61 @@
+[
+  {
+    "category": "random",
+    "name": "random_baseline_s143",
+    "hypothesis": "A seeded random combination of allowed operators is used only as a control group; it does not encode an economic hypothesis.",
+    "economic_rationale": "None. This baseline estimates how easily a mechanically generated expression can appear interesting on the same sample.",
+    "expression": "Rank(Corr(vwap, volume, 10)) + Rank(Delta(close, 2))",
+    "expected_direction": "positive",
+    "data_requirements": [
+      "OHLCV",
+      "amount"
+    ],
+    "risk_notes": [
+      "No economic rationale",
+      "In-sample chance discovery",
+      "Seed-sensitive expression"
+    ],
+    "iteration_note": "Seeded random control; not produced by an LLM."
+  },
+  {
+    "category": "llm_single",
+    "name": "Volume-Weighted Reversal",
+    "hypothesis": "Stocks that have experienced a large volume-weighted price decline over the past 20 trading days tend to mean-revert upward over the next 5 trading days, while stocks with a volume-weighted price increase tend to reverse downward.",
+    "economic_rationale": "Volume-weighted price changes over a medium horizon capture persistent selling or buying pressure that may be driven by liquidity demands or temporary order imbalances. When such moves are accompanied by high volume, they are more likely due to transient liquidity effects rather than fundamental news, leading to subsequent reversal as liquidity providers are compensated and prices revert to fundamental values.",
+    "expression": "-1 * Rank(Sum(Delta(close, 1) * volume, 20) / Sum(volume, 20))",
+    "expected_direction": "positive",
+    "data_requirements": [
+      "daily adjusted close",
+      "daily volume"
+    ],
+    "risk_notes": [
+      "The factor may be sensitive to market regimes; reversal can fail during strong trending markets.",
+      "High volume may also accompany fundamental news, reducing reversal predictability.",
+      "Crowding risk exists if many market participants trade on similar reversal signals.",
+      "The factor may exhibit high turnover, leading to significant transaction costs.",
+      "Liquidity shocks can cause temporary price impacts that are not fully reversed."
+    ],
+    "iteration_note": "This is a baseline daily price-volume reversal factor. It may be enhanced by adding volatility scaling, volume shocks, or combining with other orthogonal signals. The lookback and holding periods could be optimized with proper out-of-sample testing."
+  },
+  {
+    "category": "llm_feedback",
+    "name": "Volume-Weighted Reversal Smoothed",
+    "hypothesis": "Stocks that have experienced a large volume-weighted price decline over the past 40 trading days tend to mean-revert upward over the next 5 trading days, while stocks with a volume-weighted price increase tend to reverse downward.",
+    "economic_rationale": "Volume-weighted price changes over a medium horizon capture persistent selling or buying pressure that may be driven by liquidity demands or temporary order imbalances. When such moves are accompanied by high volume, they are more likely due to transient liquidity effects rather than fundamental news, leading to subsequent reversal as liquidity providers are compensated and prices revert to fundamental values. A longer formation period reduces sensitivity to short-term noise and may mitigate drawdown risk.",
+    "expression": "-1 * Rank(Sum(Delta(close, 1) * volume, 40) / Sum(volume, 40))",
+    "expected_direction": "positive",
+    "data_requirements": [
+      "daily adjusted close",
+      "daily volume"
+    ],
+    "risk_notes": [
+      "The factor may be sensitive to market regimes; reversal can fail during strong trending markets.",
+      "High volume may also accompany fundamental news, reducing reversal predictability.",
+      "Crowding risk exists if many market participants trade on similar reversal signals.",
+      "The factor may exhibit high turnover, leading to significant transaction costs.",
+      "Liquidity shocks can cause temporary price impacts that are not fully reversed.",
+      "Longer formation period may reduce signal responsiveness and miss faster reversals."
+    ],
+    "iteration_note": "Revised lookback from 20 to 40 days to address weak rank IC and material drawdown, per rule-based diagnostics. This revision is evaluated on the same sample and may overfit; out-of-sample testing is required."
+  }
+]

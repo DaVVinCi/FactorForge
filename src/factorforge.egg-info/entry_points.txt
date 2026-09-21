@@ -1,0 +1,2 @@
+[console_scripts]
+factorforge = factorforge.cli:main
