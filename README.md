@@ -4,7 +4,6 @@
 
 [中文文档](README_CN.md)
 
-![FactorForge architecture](docs/architecture.svg)
 
 ## Important disclaimer
 
