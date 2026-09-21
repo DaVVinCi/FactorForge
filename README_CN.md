@@ -2,7 +2,6 @@
 
 > 面向“AI 算法量化研究员”岗位的可运行 MVP：让 LLM 生成结构化金融假设和受限因子表达式，自动完成安全检查、因子计算、IC/分层研究、含成本回测和一轮反馈迭代。
 
-![FactorForge architecture](docs/architecture.svg)
 
 ## 重要声明
 
